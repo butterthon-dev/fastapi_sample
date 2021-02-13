@@ -1,6 +1,6 @@
 import traceback
 from fastapi import status, HTTPException
-from exception import error_messages
+from exception.error_messages import ErrorMessage
 
 
 class ApiException(HTTPException):
@@ -16,10 +16,8 @@ class ApiException(HTTPException):
         self.status_code = status_code
         self.detail = [
             {
-                'error_code': error['error_code'],
-                'error_msg': error_messages.get(
-                    error['error_code'],
-                    *error['msg_params']),
+                'error_code': str(error['error_code']),
+                'error_msg': error['error_code'].text.format(*error['msg_params']),
             } for error in list(errors)
         ]
         super().__init__(self.status_code, self.detail)
@@ -34,15 +32,14 @@ class SystemException(HTTPException):
         self.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         self.detail = [
             {
-                'error_code': error_messages.INTERNAL_SERVER_ERROR,
-                'error_msg': error_messages.get(
-                    error_messages.INTERNAL_SERVER_ERROR)
+                'error_code': str(ErrorMessage.INTERNAL_SERVER_ERROR()),
+                'error_msg': ErrorMessage.INTERNAL_SERVER_ERROR.text
             }
         ]
         super().__init__(self.status_code, self.detail)
 
 
-def create_error(error_code: str, *msg_params) -> dict:
+def create_error(error_code: ErrorMessage, *msg_params) -> dict:
     """ エラー生成
 
     Examples
@@ -54,6 +51,6 @@ def create_error(error_code: str, *msg_params) -> dict:
     {'error_code': E_REGISTRATION, 'msg_params': ユーザー}
     """
     return {
-        'error_code': error_code,
+        'error_code': error_code(),
         'msg_params': msg_params,
     }
