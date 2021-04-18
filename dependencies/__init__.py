@@ -1,5 +1,5 @@
 from fastapi import Depends, Request
-from crud.base import get_db_session
+from crud import get_db_session
 from sqlalchemy.orm import scoped_session
 
 

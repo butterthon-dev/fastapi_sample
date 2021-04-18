@@ -15,3 +15,6 @@ class ErrorMessage:
 
     class FAILURE_LOGIN(BaseMessage):
         text = 'ログイン失敗'
+
+    class INVALID_EMAIL_OR_PASSWORD(BaseMessage):
+        text = 'メールアドレス または パスワードが不正です'

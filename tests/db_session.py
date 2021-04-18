@@ -1,6 +1,29 @@
-from core.config import get_env
+from threading import local as thread_local
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, Session
+
+from core.config import get_env
+
+_thread_local = thread_local()
+
+
+def set_current_test_db_session(db_session: scoped_session) -> None:
+    """ スレッドローカルにテスト用のDBセッションをセット
+
+    Args:
+        db_session (scoped_session): テスト用のDBセッション
+    """
+    setattr(_thread_local, 'db_session', db_session)
+
+
+def get_current_test_db_session() -> scoped_session:
+    """ スレッドローカルからテスト用のDBセッションを取得
+
+    Returns:
+        scoped_session: テスト用のDBセッション
+    """
+    return getattr(_thread_local, 'db_session')
 
 
 class TestingDBSession(Session):

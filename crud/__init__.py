@@ -1,8 +1,10 @@
-from core.config import get_env
-from migrations.models import Base
+from typing import List, TypeVar
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session, query
-from typing import List, TypeVar
+
+from core.config import get_env
+from migrations.models import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 
@@ -16,7 +18,9 @@ Session = scoped_session(sessionmaker(connection))
 
 
 def get_db_session() -> scoped_session:
-    yield Session
+    """ 新しいDBコネクションを返す
+    """
+    return scoped_session(sessionmaker(connection))
 
 
 class BaseCRUD:

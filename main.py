@@ -1,9 +1,10 @@
-from api.endpoints.swagger_ui import openapi, swagger_ui_router
+from fastapi import FastAPI
+
+from api.endpoints.swagger_ui import swagger_ui_router
 from api.endpoints.v1 import api_v1_router
-# from fastapi import FastAPI
 from core.config import get_env
-from core.fastapi import FastAPI  # オーバーライドしたFastAPIクラスを使用する
-from middleware import (
+from middlewares import (
+    DBSessionMiddleware,
     CORSMiddleware,
     HttpRequestMiddleware
 )
@@ -17,6 +18,7 @@ app.include_router(api_v1_router, prefix='/api/v1')
 
 # ミドルウェアの設定
 app.add_middleware(HttpRequestMiddleware)
+app.add_middleware(DBSessionMiddleware)
 app.add_middleware(CORSMiddleware)
 
 
@@ -27,4 +29,3 @@ app.add_middleware(CORSMiddleware)
 # swagger-uiは開発時のみ表示されるようにする
 if get_env().debug:
     app.include_router(swagger_ui_router)
-    app.openapi = openapi

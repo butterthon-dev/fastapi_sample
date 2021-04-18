@@ -1,14 +1,13 @@
-from api.v1.auth import AuthAPI
-from dependencies import set_db_session_in_request
 from fastapi import APIRouter, Depends, Request
+
+from api.v1.auth import AuthAPI
+from api.schemas.auth import AuthRequestSchema
 
 router = APIRouter()
 
 
-@router.post(
-    '/login/',
-    dependencies=[Depends(set_db_session_in_request)])
-async def gets(request: Request):
+@router.post('/login/')
+async def login(request: Request, schema: AuthRequestSchema = Depends()):
     """ ログイン
     """
-    return AuthAPI.login(request)
+    return AuthAPI.login(request, schema)

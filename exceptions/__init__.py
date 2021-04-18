@@ -1,6 +1,6 @@
 import traceback
 from fastapi import status, HTTPException
-from exception.error_messages import ErrorMessage
+from exceptions.error_messages import ErrorMessage
 
 
 class ApiException(HTTPException):

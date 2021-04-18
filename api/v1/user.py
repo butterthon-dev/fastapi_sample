@@ -1,8 +1,9 @@
+from typing import List
+
 from api.schemas.user import CreateUser, UpdateUser, UserInDB
 from crud.crud_user import CRUDUser
 from fastapi import Request
-# from fastapi.encoders import jsonable_encoder  # 削除
-from typing import List
+from utils.hasher import make_password
 
 
 class UserAPI:
@@ -22,7 +23,13 @@ class UserAPI:
     ) -> UserInDB:
         """ 新規登録
         """
-        return CRUDUser(request.state.db_session).create(schema.dict())
+        data = schema.dict()
+
+        # パスワードハッシュ化
+        data['password'] = make_password(data['password'])
+
+        # ユーザ登録実行
+        return CRUDUser(request.state.db_session).create(data)
 
     @classmethod
     def update(

@@ -1,4 +1,4 @@
-from crud.base import BaseCRUD
+from crud import BaseCRUD
 from migrations.models import User
 
 
