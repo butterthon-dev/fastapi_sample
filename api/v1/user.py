@@ -3,7 +3,7 @@ from typing import List
 from api.schemas.user import CreateUser, UpdateUser, UserInDB
 from crud.crud_user import CRUDUser
 from fastapi import Request
-from utils.hasher import make_password
+from utilities.hasher import make_password
 
 
 class UserAPI:

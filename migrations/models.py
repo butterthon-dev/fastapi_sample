@@ -2,6 +2,7 @@ from sqlalchemy import (
     BOOLEAN,
     Column,
     INTEGER,
+    TEXT,
     TIMESTAMP,
     VARCHAR,
 )
@@ -51,7 +52,7 @@ class BaseModel(Base):
 class User(BaseModel):
     __tablename__ = 'users'
 
-    email = Column(VARCHAR(254), unique=True, nullable=False)
+    username = Column(TEXT, unique=True, nullable=False)
     password = Column(VARCHAR(128), nullable=False)
     last_name = Column(VARCHAR(100), nullable=False)
     first_name = Column(VARCHAR(100), nullable=False)

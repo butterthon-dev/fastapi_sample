@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from starlette.middleware.authentication import AuthenticationMiddleware
 
 from api.endpoints.swagger_ui import swagger_ui_router
 from api.endpoints.v1 import api_v1_router
 from core.config import get_env
 from middlewares import (
+    AuthenticationBackend,
     DBSessionMiddleware,
     CORSMiddleware,
     HttpRequestMiddleware
@@ -17,10 +19,10 @@ app = FastAPI(
 app.include_router(api_v1_router, prefix='/api/v1')
 
 # ミドルウェアの設定
+app.add_middleware(AuthenticationMiddleware, backend=AuthenticationBackend())  # 追加（HttpRequestMiddlewareより前に追加）
 app.add_middleware(HttpRequestMiddleware)
 app.add_middleware(DBSessionMiddleware)
 app.add_middleware(CORSMiddleware)
-
 
 # @app.get("/")
 # async def root():

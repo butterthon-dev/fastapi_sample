@@ -1,9 +1,9 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from typing import Optional
 
 
 class BaseUser(BaseModel):
-    email: EmailStr
+    username: str
     last_name: str
     first_name: str
     is_admin: bool

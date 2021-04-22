@@ -18,3 +18,11 @@ class ErrorMessage:
 
     class INVALID_EMAIL_OR_PASSWORD(BaseMessage):
         text = 'メールアドレス または パスワードが不正です'
+    
+    class INVALID_TOKEN(BaseMessage):
+        text = '不正なトークンです'
+
+    class EXPIRED_TOKEN(BaseMessage):
+        """ あえてINVALID_TOKENと同じエラーメッセージにしている
+        """
+        text = '不正なトークンです'
