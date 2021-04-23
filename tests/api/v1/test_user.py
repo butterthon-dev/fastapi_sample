@@ -15,21 +15,21 @@ class TestUserAPI(BaseTestCase):
         # テストユーザー登録
         test_data = [
             {
-                'email': 'test1@example.com',
+                'username': 'test1@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
                 'is_admin': False
             },
             {
-                'email': 'test2@example.com',
+                'username': 'test2@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
                 'is_admin': True
             },
             {
-                'email': 'test3@example.com',
+                'username': 'test3@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
@@ -51,7 +51,7 @@ class TestUserAPI(BaseTestCase):
 
         # レスポンスの内容を検証
         expected_data = [{
-            'email': item['email'],
+            'username': item['username'],
             'last_name': item['last_name'],
             'first_name': item['first_name'],
             'is_admin': item['is_admin'],
@@ -64,21 +64,21 @@ class TestUserAPI(BaseTestCase):
         # テストユーザー登録
         test_data = [
             {
-                'email': 'test1@example.com',
+                'username': 'test1@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
                 'is_admin': False
             },
             {
-                'email': 'test2@example.com',
+                'username': 'test2@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
                 'is_admin': True
             },
             {
-                'email': 'test3@example.com',
+                'username': 'test3@example.com',
                 'password': 'password',
                 'last_name': 'last_name',
                 'first_name': 'first_name',
@@ -100,7 +100,7 @@ class TestUserAPI(BaseTestCase):
 
         # レスポンスの内容を検証
         expected_data = [{
-            'email': item['email'],
+            'username': item['username'],
             'last_name': item['last_name'],
             'first_name': item['first_name'],
             'is_admin': item['is_admin'],
