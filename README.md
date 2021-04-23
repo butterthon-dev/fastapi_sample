@@ -1,2 +1,2 @@
 # fastapi_sample
-FastAPIのサンプルコード
+FastAPI sample.
