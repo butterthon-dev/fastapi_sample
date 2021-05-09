@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 
 class BaseUser(BaseModel):
@@ -21,5 +22,9 @@ class UpdateUser(BaseUser):
 
 
 class UserInDB(BaseUser):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
     class Config:
         orm_mode = True
