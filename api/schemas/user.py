@@ -22,6 +22,7 @@ class UpdateUser(BaseUser):
 
 
 class UserInDB(BaseUser):
+    # Depends on your need
     id: int
     created_at: datetime
     updated_at: datetime
