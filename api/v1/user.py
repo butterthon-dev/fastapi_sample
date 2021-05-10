@@ -41,8 +41,14 @@ class UserAPI:
         """ 更新
         """
         crud = CRUDUser(request.state.db_session)
+
         obj = crud.get_by_id(id)
-        return CRUDUser(request.state.db_session).update(obj, schema.dict())
+        data = schema.dict()
+
+        # パスワードハッシュ化
+        data['password'] = make_password(data['password'])
+
+        return CRUDUser(request.state.db_session).update(obj, data)
 
     @classmethod
     def delete(cls, request: Request, id: int) -> None:

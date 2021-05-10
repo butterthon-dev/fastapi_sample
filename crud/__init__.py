@@ -72,6 +72,6 @@ class BaseCRUD:
         """
         obj = self.get_by_id(id)
         if obj:
-            obj.delete()
+            self.db_session.delete(obj)
             self.db_session.flush()
         return None

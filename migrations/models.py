@@ -35,6 +35,7 @@ class BaseModel(Base):
         'updated_at',
         TIMESTAMP(timezone=True),
         onupdate=current_timestamp(),
+        default=current_timestamp(),
         comment='最終更新日時',
     )
 
